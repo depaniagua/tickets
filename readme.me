@@ -1,0 +1,21 @@
+# Microservicios AWS / DynamoDB / Front-end
+
+Este es un ejemplo de cómo implementar un microservicio en AWS por medio de funciones lambda y acceder a ellas a través de un formulario HTML
+
+Para la ejecución del microservicio se creó una base de datos DynamoDB con una tabla: Tickets. Posteriormente se creó en Amazon IAM una política mediante la cual se da acceso a la base de datos DynamoDB, cuya definición se encuentra en el archivo Politica.json. Esta politica fue asignada a un rol para ejecutar las funciones.
+Nota: Este archivo de política omite información del resource, reemplazada por una "XXXXXXXXXXXXXXX" por motivos de seguridad. Al replicar este ejercicio se debe reemplazar "XXXXXXXXXXXXXXX" por el hash asignado por AWS al crear la tabla.
+
+Después de esto se crearon las funciones con el código que se encuentra en los archivos function-createTickets.js y function-readTickets.js.
+
+A continuación se creó el api gateway con un recurso /tickets y el metodo GET con la función readTickets y el metodo POST con la función createTickets. Se habilitó CORS (actions / Enable CORS) para permitir cross domine, es decir, permitir peticiones desde otros dominios.
+
+Por último, se realizó el despliegue de la aplicación (action / Deploy API), obteniendo la url que se debe usar como API_URL en el archivo \front-api-gateway\js\controller.js
+
+En este proyecto se encuentran los siguientes archivos:
+* function-createTickets.js: Archivo de código de la función createTickets.
+* function-readTickets.js: Archivo de código de la función readTickets.
+* Politica.json: Archivo de código de la definición de la política de acceso a DynamoDB
+* index.html: Vista de la aplicación en la cual se consultan y crean tickets
+* controller.js: Archivo que consume el microservicio y presenta gráficamente su resultado
+
+
